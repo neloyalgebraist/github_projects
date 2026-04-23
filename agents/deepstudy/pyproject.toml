@@ -1,0 +1,25 @@
+[project]
+name = "deepstudy"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "neloyalgebraist", email = "neloyalgebraist@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "arxiv>=3.0.0",
+    "langchain-community>=0.4.1",
+    "langchain-google-genai>=4.2.2",
+    "langchain-groq>=1.1.2",
+    "langchain-mistralai>=1.1.2",
+    "langgraph>=1.1.9",
+    "pydantic>=2.13.3",
+    "python-dotenv>=1.2.2",
+    "streamlit>=1.56.0",
+    "tavily-python>=0.7.23",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.6,<0.12.0"]
+build-backend = "uv_build"
