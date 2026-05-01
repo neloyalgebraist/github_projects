@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1 class="text-3xl font-bold mb-6 text-slate-800 dark:text-white underline decoration-brand decoration-4 underline-offset-8">Latest Posts</h1>
+    
+    <div class="grid gap-6">
+        {% for post in posts %}
+        <div class="card">
+            <div class="flex items-center space-x-4 mb-4">
+                <img class="w-10 h-10 rounded-full border-2 border-brand object-cover" src="{{ url_for('static', path='/profile_pics/' + post.profile_pic) }}" alt="{{ post.author }}">
+                <div>
+                    <h2 class="text-xl font-semibold text-brand dark:text-brand-light leading-tight">{{ post.title }}</h2>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs">By {{ post.author }} on {{ post.date_posted }}</p>
+                </div>
+            </div>
+            <p class="text-slate-700 dark:text-slate-300">{{ post.content }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
+
