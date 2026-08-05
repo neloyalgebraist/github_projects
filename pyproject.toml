@@ -1,0 +1,35 @@
+[project]
+name = "multi-agent-research"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Neloy", email = "neloyalgebraist@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "langchain>=1.3.14",
+    "langchain-community>=0.4.2",
+    "langchain-core>=1.5.3",
+    "langchain-groq>=1.1.3",
+    "lxml>=6.1.1",
+    "python-dotenv>=1.2.2",
+    "readability-lxml>=0.8.4.1",
+    "requests>=2.34.2",
+    # streamlit 1.61 calls starlette's GZipResponder without the
+    # `thread_minimum_size` argument that starlette 1.4 made required, so every
+    # gzipped request (i.e. every browser request) 500s. Streamlit's own pin
+    # (starlette<2,>=0.46) is too loose to prevent it. Remove once fixed upstream.
+    "starlette<1.4",
+    "streamlit>=1.61.0",
+    "tavily-python>=0.7.27",
+    "trafilatura>=2.2.0",
+]
+
+[project.scripts]
+multi-agent-research = "multi_agent_research.main:main"
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
