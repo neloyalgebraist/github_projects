@@ -5,7 +5,8 @@ from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain.agents import create_react_agent, AgentExecutor
 
 from langsmith import Client
-
+from langchain.tools import tool
+import requests
 from langchain_groq import ChatGroq
 
 load_dotenv()
@@ -19,6 +20,18 @@ for key in ("GROQ_API_KEY", "TAVILY_API_KEY"):
         )
 
 search_tool = TavilySearchResults(max_results=3)
+
+
+def get_weather_data(city: str) -> str:
+    """
+    Fetch current weather information for a city.
+    """
+
+    url = (
+        f"http://api.weatherstack.com/current?"
+        f"access_key={WEATHERSTACK_API_KEY}&query={city}"
+    )
+
 
 # --- Step 1: calling a tool directly (kept for reference) ---
 # Costs a Tavily API call on every run, so it's off while we work on the agent.
@@ -51,5 +64,7 @@ agent_executor = AgentExecutor(
     max_iterations=5,  # circuit breaker: never loop forever
 )
 
-result = agent_executor.invoke({"input": "Find the capital of India"})
+result = agent_executor.invoke(
+    {"input": "Tell me the latest news about Iran and USA war."}
+)
 print("\nFINAL ANSWER:", result["output"])
