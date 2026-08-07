@@ -1,14 +1,13 @@
-"""Command-line entry point.
+import sys
 
-Wired to the `multi-agent-research` command via [project.scripts] in
-pyproject.toml. Replace the body as the pipeline takes shape.
-"""
+from multi_agent_research.pipelines.pipeline import research_pipeline
 
-from __future__ import annotations
+DEFAULT_TOPIC = "The impact of AI on the job market in 2026"
 
 
 def main() -> None:
-    print("multi-agent-research: nothing wired up yet.")
+    topic = " ".join(sys.argv[1:]).strip() or DEFAULT_TOPIC
+    research_pipeline(topic)
 
 
 if __name__ == "__main__":

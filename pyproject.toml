@@ -21,6 +21,7 @@ dependencies = [
     # `thread_minimum_size` argument that starlette 1.4 made required, so every
     # gzipped request (i.e. every browser request) 500s. Streamlit's own pin
     # (starlette<2,>=0.46) is too loose to prevent it. Remove once fixed upstream.
+    "rich>=15.0.0",
     "starlette<1.4",
     "streamlit>=1.61.0",
     "tavily-python>=0.7.27",
