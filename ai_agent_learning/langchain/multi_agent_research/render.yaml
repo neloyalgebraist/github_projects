@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: multi-agent-research
+    runtime: python
+    plan: free
+    region: oregon
+
+    # Install from uv.lock rather than a loose requirements.txt, so the
+    # deployed dependency set is exactly the tested one — including the
+    # deliberate starlette<1.4 pin (see README, Design decisions).
+    buildCommand: pip install uv && uv sync --frozen --no-dev
+
+    # Render injects $PORT and requires binding to 0.0.0.0. Streamlit defaults
+    # to 8501 on localhost, which Render's proxy cannot reach.
+    startCommand: >-
+      uv run streamlit run app.py
+      --server.port $PORT
+      --server.address 0.0.0.0
+      --server.headless true
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.13.4"
+      # Set these in the Render dashboard; sync:false keeps them out of git.
+      - key: GROQ_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
